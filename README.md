@@ -14,6 +14,8 @@ We will acquire the data through data mining with the [LyricsGenious API](https:
 
 There is a script, lyrics_extraction.py, which gets the lyrics. You can use it by running it and giving it a json with a list of songs with the artist and song title written. For this you need to have an API token from [here](https://genius.com/api-clients). 
 
+Political data is acquired from Gallup (https://www.gallup.com/home.aspx) and Pew Research Center (https://www.pewresearch.org/) surveys. The list with links to each survey used in this project is stored in the data folder. Similarly, pre-processed and processed political data is store in the folder. Processing of the data included: removing data outside of the range (2015-2025), renaming the columns for clarity, changing the type of values in columns to integers, removing NaNs and symbols like "*", "--" for plotting efficiency, and small aesthetic changes. The code used for data processing is stored in the data folder.
+
 ## How to start
 
 Sync the dependencies with your environment by running:
