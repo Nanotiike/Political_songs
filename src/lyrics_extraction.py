@@ -27,12 +27,25 @@ def save_lyrics_to_json(data, file_path):
         json.dump(data, f, indent=4, ensure_ascii=False)
 
 
+def _normalize(text):
+    """Normalize text for loose comparison: lowercase, strip, and unify quote characters."""
+    text = text.strip().lower()
+    # Map curly quotes/apostrophes to straight ones
+    replacements = {
+        "\u2018": "'", "\u2019": "'",   # ‘ ’
+        "\u201c": '"', "\u201d": '"',   # “ ”
+    }
+    for curly, straight in replacements.items():
+        text = text.replace(curly, straight)
+    return text
+
+
 def titles_match(requested_title, requested_artist, result):
     """Loose check that Genius's top result is actually the song we asked for."""
-    requested_title = requested_title.strip().lower()
-    requested_artist = requested_artist.strip().lower()
-    result_title = (result.title or "").strip().lower()
-    result_artist = (result.artist or "").strip().lower()
+    requested_title = _normalize(requested_title)
+    requested_artist = _normalize(requested_artist)
+    result_title = _normalize(result.title or "")
+    result_artist = _normalize(result.artist or "")
     return requested_title in result_title and requested_artist in result_artist
 
 
