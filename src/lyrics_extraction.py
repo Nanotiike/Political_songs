@@ -2,6 +2,8 @@ import os
 import json
 import time
 from lyricsgenius import Genius
+import re
+import unicodedata
 
 REQUEST_DELAY_SECONDS = 0.75  # small pause between API calls to avoid rate limiting
 
@@ -28,15 +30,12 @@ def save_lyrics_to_json(data, file_path):
 
 
 def _normalize(text):
-    """Normalize text for loose comparison: lowercase, strip, and unify quote characters."""
-    text = text.strip().lower()
-    # Map curly quotes/apostrophes to straight ones
-    replacements = {
-        "\u2018": "'", "\u2019": "'",   # ‘ ’
-        "\u201c": '"', "\u201d": '"',   # “ ”
-    }
-    for curly, straight in replacements.items():
-        text = text.replace(curly, straight)
+    """Reduce text to lowercase words only, so punctuation differences don't matter."""
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(c for c in text if not unicodedata.combining(c))  # drop accents
+    text = text.lower()
+    text = re.sub(r"[^\w\s]", "", text)   # remove all punctuation
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 
