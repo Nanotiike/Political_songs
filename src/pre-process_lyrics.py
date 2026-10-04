@@ -7,10 +7,14 @@ import re
 def downcase_lyrics(lyrics: str) -> str:
     return lyrics.lower()
 
-def normalize_apostrophe(lyrics: str) -> str:
+def normalize_utf(lyrics: str) -> str:
     replacements = {
             "\u2018": "'", "\u2019": "'",   # ‘ ’
             "\u201c": '"', "\u201d": '"',   # “ ”
+            "\ufeff": "", "\u200b": "",     # BOM zero-width space
+            "\u2005": " ", "\u205f": " ",   # Four-per-em space medium mathematical space
+            "\u2013": " ", "\u2014": " ",    # en dash em dash
+            "\u0435": "e"                   # e
         }
     for curly, straight in replacements.items():
         lyrics = lyrics.replace(curly, straight)
@@ -20,7 +24,7 @@ def remove_bracket_contents(lyrics: str) -> str:
     start = "["
     end = "]"
     pattern = "%s(.*?)%s" % (re.escape(start), re.escape(end))
-    cleaned_str = re.sub(pattern, "", lyrics)
+    cleaned_str = re.sub(pattern, "", lyrics, flags=re.DOTALL)
     return cleaned_str
 
 def remove_newline_char(lyrics: str) -> str:
@@ -101,7 +105,7 @@ def main(file_path):
         brackets_removed_lyrics = remove_bracket_contents(song_lyrics)
 
         # Normalize apostrophe
-        norm_apostr_lyrics = normalize_apostrophe(brackets_removed_lyrics)
+        norm_apostr_lyrics = normalize_utf(brackets_removed_lyrics)
 
         # Lowercase lyrics
         lowercased_lyrics = downcase_lyrics(norm_apostr_lyrics)
