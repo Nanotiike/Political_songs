@@ -13,7 +13,7 @@ def normalize_utf(lyrics: str) -> str:
             "\u201c": '"', "\u201d": '"',   # “ ”
             "\ufeff": "", "\u200b": "",     # BOM zero-width space
             "\u2005": " ", "\u205f": " ",   # Four-per-em space medium mathematical space
-            "\u2013": " ", "\u2014": " ",    # en dash em dash
+            "\u2013": " ", "\u2014": " ",   # en dash em dash
             "\u0435": "e"                   # e
         }
     for curly, straight in replacements.items():
