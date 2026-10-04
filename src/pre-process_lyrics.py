@@ -104,11 +104,11 @@ def main(file_path):
         # Remove brackets and [] contents
         brackets_removed_lyrics = remove_bracket_contents(song_lyrics)
 
-        # Normalize apostrophe
-        norm_apostr_lyrics = normalize_utf(brackets_removed_lyrics)
+        # Normalize unicode
+        normalize_lyrics = normalize_utf(brackets_removed_lyrics)
 
         # Lowercase lyrics
-        lowercased_lyrics = downcase_lyrics(norm_apostr_lyrics)
+        lowercased_lyrics = downcase_lyrics(normalize_lyrics)
 
         # Remove newline char and double spaces
         single_line_lyrics = remove_newline_char(lowercased_lyrics)
