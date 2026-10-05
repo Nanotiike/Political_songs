@@ -12,6 +12,7 @@ Political data (access 22.09.2026):
 10. Economy: http://news.gallup.com/poll/1609/consumer-views-economy.aspx (Economic Confidence — Current Conditions)
 11. Job Market: http://news.gallup.com/poll/1609/consumer-views-economy.aspx (Thinking about the job situation in America today, would you say that it is now a good time or a bad time to find a quality job?)
 12. AI: https://news.gallup.com/poll/712751/americans-cool-toward.aspx (Americans See More Harm Than Good From AI in 2026)
+13. Israel: https://news.gallup.com/poll/702440/israelis-no-longer-ahead-americans-middle-east-sympathies.aspx (Americans' Sympathies in the Middle East Situation) (last access: 05.10.2026)
 
 Gallup permissions: https://www.gallup.com/corporate/198173/gallup-permissions.aspx
 
