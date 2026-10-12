@@ -5,8 +5,10 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "dash>=4.4.1",
     "lyricsgenius>=3.12.2",
     "numpy>=2.5.3",
+    "plotly>=7.1.0",
     "scikit-learn>=1.9.1",
 ]
 

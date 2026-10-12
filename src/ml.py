@@ -8,14 +8,15 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.model_selection import train_test_split
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data" / "pre-processed_data"
+DATA_DIR = BASE_DIR / "data" / "pre-processed_data" / "second_processing"
  
 POLITICAL_PATH = DATA_DIR / "political_songs.json"
 NON_POLITICAL_PATH = DATA_DIR / "non-political_songs.json"
 YEAR_END_PATH = DATA_DIR / "year-end_top20_songs.json"
- 
-# PLACEHOLDER - change to wherever you want the results saved
+
 OUTPUT_PATH = BASE_DIR / "data" / "processed_data" / "year-end_top20_songs_predictions.json"
+WEIGHTS_PATH = BASE_DIR / "data" / "processed_data" / "word_weights.json"
+
 
 TEST_SIZE = 0.2         # 80% train / 20% test
 TOP_N_WORDS = 20        # words to show per class in the report
@@ -103,6 +104,14 @@ def main():
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
+
+    word_weights = [
+        {"word": str(words[i]), "weight": float(coefs[i])}
+        for i in order[::-1]
+    ]
+    with open(WEIGHTS_PATH, "w", encoding="utf-8") as f:
+        json.dump(word_weights, f, ensure_ascii=False, indent=2)
+
 
     n_pol = sum(r["prediction"] == "political" for r in results)
     print(f"\nClassified {len(results)} year-end songs: "
