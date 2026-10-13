@@ -130,22 +130,22 @@ def preprocessed_lyrics_to_json(data, preprocessed_path):
 
 def main(file_path):
     # Open and load standardized words
-    standardized_words = "data/standardized_words.json"
+    standardized_words = "data/word_correction/standardized_words.json"
     with open(standardized_words, "r", encoding="utf-8") as f:
         standardized_word_mapping = json.load(f)
 
     # Open and load stopwords
-    stopwords_file = "data/stopwords-en.txt"
+    stopwords_file = "data/word_correction/stopwords-en.txt"
     with open(stopwords_file, "r") as file:
         stopwords = set(word.strip() for word in file)
 
     # Open and load english words
-    english_words_file = "data/english_words.txt"
+    english_words_file = "data/word_correction/english_words.txt"
     with open(english_words_file, "r", encoding="utf-8") as f:
         english_words = set(word.strip() for word in f)
 
     # Open and load words that should be removed in addition to stopwords
-    removed_words_file = "data/removed_words.txt"
+    removed_words_file = "data/word_correction/removed_words.txt"
     with open(removed_words_file, "r", encoding="utf-8") as f:
         removed_words = set(word.strip() for word in f)
 
@@ -201,9 +201,9 @@ def main(file_path):
         print(f"Lyrics for '{song_title}' preprocessed.\n")
 
     # Write the pre-processed results to a new JSON file
-    os.makedirs("data/pre-processed_data", exist_ok=True)
+    os.makedirs("data/pre-processed_data/first_processing", exist_ok=True)
 
-    preprocessed_path=os.path.join("data/pre-processed_data/", os.path.basename(file_path))
+    preprocessed_path=os.path.join("data/pre-processed_data/first_processing", os.path.basename(file_path))
 
     preprocessed_lyrics_to_json(data, preprocessed_path)
 

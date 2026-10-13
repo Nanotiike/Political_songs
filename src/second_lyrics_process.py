@@ -21,9 +21,9 @@ def spelling_check(lyrics: str, word_mapping: dict[str, str]) -> str:
 
 
 def main(file_path):
-    correct_spelling_file = "data/correct_spelling.json"
-    stopwords_file = "data/stopwords-en.txt"
-    removed_words_file = "data/removed_words.txt"
+    correct_spelling_file = "data/word_correction/correct_spelling.json"
+    stopwords_file = "data/word_correction/stopwords-en.txt"
+    removed_words_file = "data/word_correction/removed_words.txt"
 
     with open(correct_spelling_file, "r", encoding="utf-8") as f:
         correct_spelling = json.load(f)
